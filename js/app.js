@@ -14,8 +14,11 @@ var getCookiesSoldPerHour = function () {
 
   for (var i = 0; i < this.numberHoursStoreOpen; i++) {
     var randomCookiesPerHour = this.avgCookiePerSale * this.randomCustomersPerHour();
+
     randomCookiesPerHour = Math.round(randomCookiesPerHour);
     totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
+
+    // am/pm modifier
     if (j < 12) {
       this.arrayPurchasedCookiesInADay[i] = `${j}am: ${randomCookiesPerHour} cookies`;
       j++;
@@ -33,105 +36,55 @@ var getCookiesSoldPerHour = function () {
     }
   }
 
+  // push total cookies sold per day into array 
   this.arrayPurchasedCookiesInADay.push(`Total: ${totalCookiesSoldDay} cookies`);
 
   console.log(this.arrayPurchasedCookiesInADay);
   return this.arrayPurchasedCookiesInADay;
 }
 
-// constructor
-// function objectType (x property, y property, z property) {
-// this.x = x;
-// this.y = y; 
-// this.z = z; 
-// }
-
-// var nameOfObject = new objectType (x, y, z);
-
-// declare object literals for each city; each object contains minimum customers, maximum costumers, average cookies sold per sale, customers per hour, cookies purchased per hour
-var Seattle = {
-  location: 'Seattle',
-  minCustomers: 23,
-  maxCustomers: 65,
-  avgCookiePerSale: 6.3,
-  storeOpenTime: 6,
-  numberHoursStoreOpen: 14,
-
-  // empty array at time of declaration, but will populate with customers per hour function and cookies sold per hour function
-  arrayPurchasedCookiesInADay: [],
-
-  // run function for customers per hour and store in this property 
-  randomCustomersPerHour: getCustomersPerHour,
-
-  // run function for cookies sold per hour and store in this property
-  simulatedCookiesPurchasedPerHour: getCookiesSoldPerHour,
+// city constructor
+function City(location, minCustomers, maxCustomers, avgCookiePerSale, storeOpenTime, numberHoursStoreOpen, arrayPurchasedCookiesInADay, randomCustomersPerHour, simulatedCookiesPurchasedPerHour) {
+  this.location = location;
+  this.minCustomers = minCustomers;
+  this.maxCustomers = maxCustomers;
+  this.avgCookiePerSale = avgCookiePerSale;
+  this.storeOpenTime = storeOpenTime;
+  this.numberHoursStoreOpen = numberHoursStoreOpen;
+  this.arrayPurchasedCookiesInADay = arrayPurchasedCookiesInADay;
+  this.randomCustomersPerHour = randomCustomersPerHour;
+  this.simulatedCookiesPurchasedPerHour = simulatedCookiesPurchasedPerHour;
 }
+
+// creating each city as object
+var Seattle = new City('Seattle', 23, 65, 6.3, 6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+
+var Tokyo = new City('Tokyo', 3, 24, 1.2, 6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+
+var Dubai = new City('Dubai', 11, 38, 3.7, 6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+
+var Paris = new City('Paris', 20, 38, 2.3, 6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+
+var Lima = new City('Lima', 2, 16, 4.6, 6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+
+// create array of cities
+var cities = [Seattle, Tokyo, Dubai, Paris, Lima];
+
+// testing city data output
 console.log(Seattle);
-Seattle.randomCustomersPerHour();
 Seattle.simulatedCookiesPurchasedPerHour();
 
-var Tokyo = {
-  location: 'Tokyo',
-  minCustomers: 3,
-  maxCustomers: 24,
-  avgCookiePerSale: 1.2,
-  storeOpenTime: 6,
-  numberHoursStoreOpen: 14,
-  arrayPurchasedCookiesInADay: [],
-  randomCustomersPerHour: getCustomersPerHour,
-  simulatedCookiesPurchasedPerHour: getCookiesSoldPerHour,
-}
 console.log(Tokyo);
-Tokyo.randomCustomersPerHour();
 Tokyo.simulatedCookiesPurchasedPerHour();
 
-var Dubai = {
-  location: 'Dubai',
-  minCustomers: 11,
-  maxCustomers: 38,
-  avgCookiePerSale: 3.7,
-  storeOpenTime: 6,
-  numberHoursStoreOpen: 14,
-  arrayPurchasedCookiesInADay: [],
-  randomCustomersPerHour: getCustomersPerHour,
-  simulatedCookiesPurchasedPerHour: getCookiesSoldPerHour,
-}
 console.log(Dubai);
-Dubai.randomCustomersPerHour();
 Dubai.simulatedCookiesPurchasedPerHour();
 
-var Paris = {
-  location: 'Paris',
-  minCustomers: 20,
-  maxCustomers: 38,
-  avgCookiePerSale: 2.3,
-  storeOpenTime: 6,
-  numberHoursStoreOpen: 14,
-  arrayPurchasedCookiesInADay: [],
-  randomCustomersPerHour: getCustomersPerHour,
-  simulatedCookiesPurchasedPerHour: getCookiesSoldPerHour,
-}
 console.log(Paris);
-Paris.randomCustomersPerHour();
 Paris.simulatedCookiesPurchasedPerHour();
 
-var Lima = {
-  location: 'Lima',
-  minCustomers: 2,
-  maxCustomers: 16,
-  avgCookiePerSale: 4.6,
-  storeOpenTime: 6,
-  numberHoursStoreOpen: 14,
-  arrayPurchasedCookiesInADay: [],
-  randomCustomersPerHour: getCustomersPerHour,
-  simulatedCookiesPurchasedPerHour: getCookiesSoldPerHour,
-}
 console.log(Lima);
-Lima.randomCustomersPerHour();
 Lima.simulatedCookiesPurchasedPerHour();
-
-
-
 
 
 
@@ -155,9 +108,6 @@ for (var i = 0; i < 4; i++) {
   tdClassifier.textContent = classifiers[i];
   tr.append(tdClassifier);
 }
-
-// create array of cities as objects
-var cities = [Seattle, Tokyo, Dubai, Paris, Lima];
 
 // display location, min, max, avg in table 
 for (var i = 0; i < cities.length; i++) {
