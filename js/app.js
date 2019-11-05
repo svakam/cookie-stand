@@ -1,10 +1,52 @@
 'use strict';
 
-// var getCookiesSold = function() {
+// function for getting random number of customers per hour 
+var getCustomersPerHour = function () {
+  var random = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
 
+  return random;
+}
+
+// function for getting cookies sold per hour
+var getCookiesSoldPerHour = function () {
+  var j = this.storeOpenTime;
+  var totalCookiesSoldDay = 0;
+
+  for (var i = 0; i < this.numberHoursStoreOpen; i++) {
+    var randomCookiesPerHour = this.avgCookiePerSale * this.randomCustomersPerHour();
+    randomCookiesPerHour = Math.round(randomCookiesPerHour);
+    totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
+    if (j < 12) {
+      this.arrayPurchasedCookiesInADay[i] = `${j}am: ${randomCookiesPerHour} cookies`;
+      j++;
+      continue;
+    }
+    if (j === 12) {
+      this.arrayPurchasedCookiesInADay[i] = `12pm: ${randomCookiesPerHour} cookies`;
+      j++;
+      continue;
+    }
+    if (j > 12) {
+      this.arrayPurchasedCookiesInADay[i] = `${j - 12}pm: ${randomCookiesPerHour} cookies`;
+      j++;
+      continue;
+    }
+  }
+
+  this.arrayPurchasedCookiesInADay.push(`Total: ${totalCookiesSoldDay} cookies`);
+
+  console.log(this.arrayPurchasedCookiesInADay);
+  return this.arrayPurchasedCookiesInADay;
+}
+
+// constructor
+// function objectType (x property, y property, z property) {
+// this.x = x;
+// this.y = y; 
+// this.z = z; 
 // }
 
-// var getCustomersPerHour = function() {}
+// var nameOfObject = new objectType (x, y, z);
 
 // declare object literals for each city; each object contains minimum customers, maximum costumers, average cookies sold per sale, customers per hour, cookies purchased per hour
 var Seattle = {
@@ -14,44 +56,15 @@ var Seattle = {
   avgCookiePerSale: 6.3,
   storeOpenTime: 6,
   numberHoursStoreOpen: 14,
+
+  // empty array at time of declaration, but will populate with customers per hour function and cookies sold per hour function
   arrayPurchasedCookiesInADay: [],
 
-  randomCustomersPerHour: function () {
-    var random = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
-    return random;
-  },
+  // run function for customers per hour and store in this property 
+  randomCustomersPerHour: getCustomersPerHour,
 
-  simulatedCookiesPurchasedPerHour: function () {
-    var j = this.storeOpenTime;
-    var totalCookiesSoldDay = 0;
-
-    for (var i = 0; i < this.numberHoursStoreOpen; i++) {
-      var randomCookiesPerHour = this.avgCookiePerSale * this.randomCustomersPerHour();
-      randomCookiesPerHour = Math.round(randomCookiesPerHour);
-      totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
-      if (j < 12) {
-        this.arrayPurchasedCookiesInADay[i] = `${j}am: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-      if (j === 12) {
-        this.arrayPurchasedCookiesInADay[i] = `12pm: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-      if (j > 12) {
-        this.arrayPurchasedCookiesInADay[i] = `${j - 12}pm: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-    }
-
-    this.arrayPurchasedCookiesInADay.push(`Total: ${totalCookiesSoldDay} cookies`);
-
-    console.log(this.arrayPurchasedCookiesInADay);
-    return this.arrayPurchasedCookiesInADay;
-  }
-
+  // run function for cookies sold per hour and store in this property
+  simulatedCookiesPurchasedPerHour: getCookiesSoldPerHour,
 }
 console.log(Seattle);
 Seattle.randomCustomersPerHour();
@@ -65,45 +78,8 @@ var Tokyo = {
   storeOpenTime: 6,
   numberHoursStoreOpen: 14,
   arrayPurchasedCookiesInADay: [],
-
-  randomCustomersPerHour: function () {
-    var random = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
-    return random;
-  },
-
-  simulatedCookiesPurchasedPerHour: function () {
-    var j = this.storeOpenTime;
-    var totalCookiesSoldDay = 0;
-
-    for (var i = 0; i < this.numberHoursStoreOpen; i++) {
-      var randomCookiesPerHour = this.avgCookiePerSale * this.randomCustomersPerHour();
-
-      randomCookiesPerHour = Math.round(randomCookiesPerHour);
-      totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
-
-      if (j < 12) {
-        this.arrayPurchasedCookiesInADay[i] = `${j}am: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-      if (j === 12) {
-        this.arrayPurchasedCookiesInADay[i] = `12pm: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-      if (j > 12) {
-        this.arrayPurchasedCookiesInADay[i] = `${j - 12}pm: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-    }
-
-    this.arrayPurchasedCookiesInADay.push(`Total: ${totalCookiesSoldDay} cookies`);
-
-    console.log(this.arrayPurchasedCookiesInADay);
-    return this.arrayPurchasedCookiesInADay;
-  }
-
+  randomCustomersPerHour: getCustomersPerHour,
+  simulatedCookiesPurchasedPerHour: getCookiesSoldPerHour,
 }
 console.log(Tokyo);
 Tokyo.randomCustomersPerHour();
@@ -117,45 +93,8 @@ var Dubai = {
   storeOpenTime: 6,
   numberHoursStoreOpen: 14,
   arrayPurchasedCookiesInADay: [],
-
-  randomCustomersPerHour: function () {
-    var random = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
-    return random;
-  },
-
-  simulatedCookiesPurchasedPerHour: function () {
-    var j = this.storeOpenTime;
-    var totalCookiesSoldDay = 0;
-
-    for (var i = 0; i < this.numberHoursStoreOpen; i++) {
-      var randomCookiesPerHour = this.avgCookiePerSale * this.randomCustomersPerHour();
-
-      randomCookiesPerHour = Math.round(randomCookiesPerHour);
-      totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
-
-      if (j < 12) {
-        this.arrayPurchasedCookiesInADay[i] = `${j}am: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-      if (j === 12) {
-        this.arrayPurchasedCookiesInADay[i] = `12pm: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-      if (j > 12) {
-        this.arrayPurchasedCookiesInADay[i] = `${j - 12}pm: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-    }
-
-    this.arrayPurchasedCookiesInADay.push(`Total: ${totalCookiesSoldDay} cookies`);
-
-    console.log(this.arrayPurchasedCookiesInADay);
-    return this.arrayPurchasedCookiesInADay;
-  }
-
+  randomCustomersPerHour: getCustomersPerHour,
+  simulatedCookiesPurchasedPerHour: getCookiesSoldPerHour,
 }
 console.log(Dubai);
 Dubai.randomCustomersPerHour();
@@ -169,45 +108,8 @@ var Paris = {
   storeOpenTime: 6,
   numberHoursStoreOpen: 14,
   arrayPurchasedCookiesInADay: [],
-
-  randomCustomersPerHour: function () {
-    var random = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
-    return random;
-  },
-
-  simulatedCookiesPurchasedPerHour: function () {
-    var j = this.storeOpenTime;
-    var totalCookiesSoldDay = 0;
-
-    for (var i = 0; i < this.numberHoursStoreOpen; i++) {
-      var randomCookiesPerHour = this.avgCookiePerSale * this.randomCustomersPerHour();
-
-      randomCookiesPerHour = Math.round(randomCookiesPerHour);
-      totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
-
-      if (j < 12) {
-        this.arrayPurchasedCookiesInADay[i] = `${j}am: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-      if (j === 12) {
-        this.arrayPurchasedCookiesInADay[i] = `12pm: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-      if (j > 12) {
-        this.arrayPurchasedCookiesInADay[i] = `${j - 12}pm: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-    }
-
-    this.arrayPurchasedCookiesInADay.push(`Total: ${totalCookiesSoldDay} cookies`);
-
-    console.log(this.arrayPurchasedCookiesInADay);
-    return this.arrayPurchasedCookiesInADay;
-  }
-
+  randomCustomersPerHour: getCustomersPerHour,
+  simulatedCookiesPurchasedPerHour: getCookiesSoldPerHour,
 }
 console.log(Paris);
 Paris.randomCustomersPerHour();
@@ -221,48 +123,17 @@ var Lima = {
   storeOpenTime: 6,
   numberHoursStoreOpen: 14,
   arrayPurchasedCookiesInADay: [],
-
-  randomCustomersPerHour: function () {
-    var random = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
-    return random;
-  },
-
-  simulatedCookiesPurchasedPerHour: function () {
-    var j = this.storeOpenTime;
-    var totalCookiesSoldDay = 0;
-
-    for (var i = 0; i < this.numberHoursStoreOpen; i++) {
-      var randomCookiesPerHour = this.avgCookiePerSale * this.randomCustomersPerHour();
-      randomCookiesPerHour = Math.round(randomCookiesPerHour);
-      totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
-
-      if (j < 12) {
-        this.arrayPurchasedCookiesInADay[i] = `${j}am: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-      if (j === 12) {
-        this.arrayPurchasedCookiesInADay[i] = `12pm: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-      if (j > 12) {
-        this.arrayPurchasedCookiesInADay[i] = `${j - 12}pm: ${randomCookiesPerHour} cookies`;
-        j++;
-        continue;
-      }
-    }
-
-    this.arrayPurchasedCookiesInADay.push(`Total: ${totalCookiesSoldDay} cookies`);
-
-    console.log(this.arrayPurchasedCookiesInADay);
-    return this.arrayPurchasedCookiesInADay;
-  }
-
+  randomCustomersPerHour: getCustomersPerHour,
+  simulatedCookiesPurchasedPerHour: getCookiesSoldPerHour,
 }
 console.log(Lima);
 Lima.randomCustomersPerHour();
 Lima.simulatedCookiesPurchasedPerHour();
+
+
+
+
+
 
 
 // add city data to sales.html 
