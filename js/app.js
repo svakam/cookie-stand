@@ -265,3 +265,62 @@ console.log(Lima);
 Lima.randomCustomersPerHour();
 Lima.simulatedCookiesPurchasedPerHour();
 
+
+
+
+// add to sales.html 
+var tableCityData = document.getElementById('tableCityData');
+var table = document.createElement('table');
+tableCityData.append(table);
+
+// create classifier row
+var classifiers = ['Location', 'Min / Cust', 'Max / Cust', 'Avg Cookie / Sale'];
+
+// loop over classifier array and print to a table row
+var tr = document.createElement('tr');
+table.append(tr);
+for (var i = 0; i < 4; i++) {
+  var tdClassifier = document.createElement('td');
+  tdClassifier.textContent = classifiers[i];
+  tr.append(tdClassifier);
+}
+
+// create array of cities as objects
+var cities = [Seattle, Tokyo, Dubai, Paris, Lima];
+
+// display location, min, max, avg in table 
+for (var i = 0; i < cities.length; i++) {
+  tr = document.createElement('tr');
+  table.append(tr);
+  var tdLocation = document.createElement('td');
+  var tdMin = document.createElement('td');
+  var tdMax = document.createElement('td');
+  var tdAvg = document.createElement('td');
+  tdLocation.textContent = cities[i].location;
+  tr.append(tdLocation);
+  tdMin.textContent = cities[i].minCustomers;
+  tr.append(tdMin);
+  tdMax.textContent = cities[i].maxCustomers;
+  tr.append(tdMax);
+  tdAvg.textContent = cities[i].avgCookiePerSale;
+  tr.append(tdAvg);
+}
+
+// display city name and ul of array of cookies sold per hour
+var unorderedList = document.getElementById('ulCity');
+for (var i = 0; i < cities.length; i++) {
+  var cityName = document.createElement('p');
+  cityName.textContent = cities[i].location;
+  ulCity.append(cityName);
+  var ulList = document.createElement('ul');
+  cityName.append(ulList);
+  for (var j = 0; j < cities[i].arrayPurchasedCookiesInADay.length; j++) {
+    var listItem = document.createElement('li');
+    listItem.textContent = cities[i].arrayPurchasedCookiesInADay[j];
+    cityName.append(listItem);
+  }
+}
+
+
+
+
