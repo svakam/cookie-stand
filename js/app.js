@@ -167,11 +167,13 @@ var renderTableHeader = function (domReference) {
   domReference.append(tr);
 }
 
-// function to create footer of hourly totals
+// function to create footer of hourly totals + total of totals
 var renderTableFooter = function (domReference) {
 
   // add new table row for vertical totals
   var tr = document.createElement('tr');
+
+  var sumHourTotal = 0;
 
   /* td for classifying vertical totals row */
   var tdVertical = document.createElement('th');
@@ -183,11 +185,20 @@ var renderTableFooter = function (domReference) {
     var tdVerticalTotals = document.createElement('td');
     var sumHour = 0;
     for (var j = 0; j < cities.length; j++) {
+      // only vertical sum
       sumHour = sumHour + cities[j].arrayPurchasedCookiesInADay[i];
+
+      // total of totals
+      sumHourTotal = sumHourTotal + cities[j].arrayPurchasedCookiesInADay[i];
     }
     tdVerticalTotals.textContent = sumHour;
     tr.append(tdVerticalTotals);
   }
+
+  /* render sum of total of totals */
+  var tdTotalTotals = document.createElement('td');
+  tdTotalTotals.textContent = sumHourTotal + ' total cookies sold';
+  tr.append(tdTotalTotals);
 
   domReference.append(tr);
 }
