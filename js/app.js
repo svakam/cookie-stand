@@ -93,13 +93,9 @@ function City(location, minCustomers, maxCustomers, avgCookiePerSale, numberHour
 
 // object declarations: 1 = location, 2 = min, 3 = max, 4 = average, 5 = hoursopen, 6 = empty array, 7 = customers, 8 = cookies sold function
 var Seattle = new City('Seattle', 23, 65, 6.3, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
-
 var Tokyo = new City('Tokyo', 3, 24, 1.2, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
-
 var Dubai = new City('Dubai', 11, 38, 3.7, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
-
 var Paris = new City('Paris', 20, 38, 2.3, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
-
 var Lima = new City('Lima', 2, 16, 4.6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
 
 // create array of city objects
