@@ -2,12 +2,14 @@
 
 var numberHoursStoreOpen = 14;
 
+
 // function for getting random number of customers per hour 
 var getCustomersPerHour = function () {
   var random = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
 
   return random;
 }
+
 
 // function for getting cookies sold per hour
 var getCookiesSoldPerHour = function () {
@@ -21,15 +23,16 @@ var getCookiesSoldPerHour = function () {
     // cookies per hour = avg sale * random customers/hour
     var randomCookiesPerHour = this.avgCookiePerSale * this.randomCustomersPerHour();
 
-    // make integer value
+    // make it an integer value
     randomCookiesPerHour = Math.round(randomCookiesPerHour);
+
+    // input cookies per hour into array
+    this.arrayPurchasedCookiesInADay[i] = randomCookiesPerHour;
 
     // cookies sold whole day = add cookies per hour to the sum, per iteration 
     totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
 
-    this.arrayPurchasedCookiesInADay[i] = randomCookiesPerHour;
-
-    // // am/pm modifier commented out because will use for table
+    // // am/pm modifier commented out because rendering in HTML table
     // if (j < 12) {
     //   this.arrayPurchasedCookiesInADay[i] = `${j}:00am: ${randomCookiesPerHour} cookies`;
     //   j++;
@@ -47,13 +50,14 @@ var getCookiesSoldPerHour = function () {
     // }
   }
 
-  // push total cookies sold per day into array 
+  // push total cookies sold per day into array; design decision
   this.arrayPurchasedCookiesInADay.push(`${totalCookiesSoldDay} cookies`);
 
   console.log(this.arrayPurchasedCookiesInADay);
 
   return this.arrayPurchasedCookiesInADay;
 }
+
 
 // city constructor
 function City(location, minCustomers, maxCustomers, avgCookiePerSale, numberHoursStoreOpen, arrayPurchasedCookiesInADay, randomCustomersPerHour, simulatedCookiesPurchasedPerHour) {
@@ -65,9 +69,13 @@ function City(location, minCustomers, maxCustomers, avgCookiePerSale, numberHour
   this.arrayPurchasedCookiesInADay = arrayPurchasedCookiesInADay; // 6
   this.randomCustomersPerHour = randomCustomersPerHour; // 7
   this.simulatedCookiesPurchasedPerHour = simulatedCookiesPurchasedPerHour; // 8
+  // render array of cookies/hour in HTML
+  this.render = function (domReference) {
+
+  }
 }
 
-// object declaration: 1 = location, 2 = min, 3 = max, 4 = average, 5 = hoursopen, 6 = empty array, 7 = customers, 8 = cookies sold function
+// object declarations: 1 = location, 2 = min, 3 = max, 4 = average, 5 = hoursopen, 6 = empty array, 7 = customers, 8 = cookies sold function
 var Seattle = new City('Seattle', 23, 65, 6.3, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
 
 var Tokyo = new City('Tokyo', 3, 24, 1.2, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
@@ -78,7 +86,7 @@ var Paris = new City('Paris', 20, 38, 2.3, 14, [], getCustomersPerHour, getCooki
 
 var Lima = new City('Lima', 2, 16, 4.6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
 
-// create array of cities
+// create array of city objects
 var cities = [Seattle, Tokyo, Dubai, Paris, Lima];
 
 // testing city data output
@@ -97,16 +105,17 @@ Paris.simulatedCookiesPurchasedPerHour();
 console.log(Lima);
 Lima.simulatedCookiesPurchasedPerHour();
 
-
-
 // add city data in a table to sales.html 
 
 // anchor to HTML and start table
-var tableCityData = document.getElementById('table-city-data');
-var table = document.createElement('table');
-table.setAttribute("id", "table");
+var divForTable = document.getElementById('div-for-table');
 
-tableCityData.append(table);
+var table = document.createElement('table');
+
+// set table element to have id of table to reference from CSS
+table.setAttribute("id", "table"); // ?
+
+divForTable.append(table);
 
 // start row of hours and total/city
 var tr = document.createElement('tr');
@@ -140,7 +149,7 @@ for (var i = 0; i < numberHoursStoreOpen; i++) {
   }
 }
 
-/* put total/city into cell */
+/* put daily total name into cell */
 var tdTotalCity = document.createElement('td');
 tdTotalCity.textContent = 'Daily Location Total';
 tr.append(tdTotalCity);
