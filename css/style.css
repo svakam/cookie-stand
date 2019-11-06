@@ -6,4 +6,6 @@
 td {
     border-style: solid;
     border-color: black;
+    border-spacing: 3px 1px;
+    text-align: center;
 }
