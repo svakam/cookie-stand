@@ -9,37 +9,51 @@ var getCustomersPerHour = function () {
 
 // function for getting cookies sold per hour
 var getCookiesSoldPerHour = function () {
-  var j = this.storeOpenTime;
+  // // commented out time-based hour counter for lab06 ul
+  // var j = this.storeOpenTime;
+
+  // initialize sum of cookies sold whole day
   var totalCookiesSoldDay = 0;
 
+  // iterating over number of hours store is open to get to each hour
   for (var i = 0; i < this.numberHoursStoreOpen; i++) {
+    // cookies per hour = avg sale * random customers/hour
     var randomCookiesPerHour = this.avgCookiePerSale * this.randomCustomersPerHour();
 
+    // make integer value of random cookies per hour
     randomCookiesPerHour = Math.round(randomCookiesPerHour);
+
+    // cookies sold whole day = add cookies per hour to the sum, per iteration 
     totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
 
+    this.arrayPurchasedCookiesInADay[i] = randomCookiesPerHour;
+
+    // // commented out lab06 time-based cookies per hour entry into array: 
     // am/pm modifier
-    if (j < 12) {
-      this.arrayPurchasedCookiesInADay[i] = `${j}am: ${randomCookiesPerHour} cookies`;
-      j++;
-      continue;
-    }
-    if (j === 12) {
-      this.arrayPurchasedCookiesInADay[i] = `12pm: ${randomCookiesPerHour} cookies`;
-      j++;
-      continue;
-    }
-    if (j > 12) {
-      this.arrayPurchasedCookiesInADay[i] = `${j - 12}pm: ${randomCookiesPerHour} cookies`;
-      j++;
-      continue;
-    }
+    // if (j < 12) {
+    //   this.arrayPurchasedCookiesInADay[i] = `${j}:00am: ${randomCookiesPerHour} cookies`;
+    //   j++;
+    //   continue;
+    // }
+    // if (j === 12) {
+    //   this.arrayPurchasedCookiesInADay[i] = `12:00pm: ${randomCookiesPerHour} cookies`;
+    //   j++;
+    //   continue;
+    // }
+    // if (j > 12) {
+    //   this.arrayPurchasedCookiesInADay[i] = `${j - 12}:0pm: ${randomCookiesPerHour} cookies`;
+    //   j++;
+    //   continue;
+    // }
+
+
   }
 
   // push total cookies sold per day into array 
-  this.arrayPurchasedCookiesInADay.push(`Total: ${totalCookiesSoldDay} cookies`);
+  this.arrayPurchasedCookiesInADay.push(`${totalCookiesSoldDay} cookies`);
 
   console.log(this.arrayPurchasedCookiesInADay);
+
   return this.arrayPurchasedCookiesInADay;
 }
 
@@ -89,72 +103,51 @@ Lima.simulatedCookiesPurchasedPerHour();
 
 
 
-// add city data to sales.html 
-var tableCityData = document.getElementById('tableCityData');
+// add city data in a table to sales.html 
+
+// anchor to HTML and start table
+var tableCityData = document.getElementById('table-city-data');
 var table = document.createElement('table');
 
 tableCityData.append(table);
 
-// create classifier row
-var classifiers = ['Location', 'Min / Cust', 'Max / Cust', 'Avg Cookie / Sale'];
-
-// loop over classifier array and print to a table row
+// start row of hours and total/city
 var tr = document.createElement('tr');
+var tdEmptyCorner = document.createElement('td');
+tr.append(tdEmptyCorner);
 
-table.append(tr);
+// how to access inner-scoped property of an object from outside?
+var j = 6;
 
-for (var i = 0; i < 4; i++) {
-  var tdClassifier = document.createElement('td');
-  tdClassifier.textContent = classifiers[i];
-  tr.append(tdClassifier);
-}
-
-// display location, min, max, avg in table 
-for (var i = 0; i < cities.length; i++) {
-  tr = document.createElement('tr');
-
-  table.append(tr);
-
-  var tdLocation = document.createElement('td');
-  var tdMin = document.createElement('td');
-  var tdMax = document.createElement('td');
-  var tdAvg = document.createElement('td');
-
-  tdLocation.textContent = cities[i].location;
-  tr.append(tdLocation);
-
-  tdMin.textContent = cities[i].minCustomers;
-  tr.append(tdMin);
-
-  tdMax.textContent = cities[i].maxCustomers;
-  tr.append(tdMax);
-
-  tdAvg.textContent = cities[i].avgCookiePerSale;
-  tr.append(tdAvg);
-}
-
-// display city name and ul of array of cookies sold per hour
-var unorderedList = document.getElementById('ulCity');
-
-for (var i = 0; i < cities.length; i++) {
-  var cityName = document.createElement('p');
-
-  cityName.textContent = cities[i].location;
-
-  ulCity.append(cityName);
-
-  var ulList = document.createElement('ul');
-
-  cityName.append(ulList);
-
-  for (var j = 0; j < cities[i].arrayPurchasedCookiesInADay.length; j++) {
-    var listItem = document.createElement('li');
-
-    listItem.textContent = cities[i].arrayPurchasedCookiesInADay[j];
-    cityName.append(listItem);
+// put times into cells
+for (var i = 0; i < 14; i++) {
+  var tdTime = document.createElement('td');
+  if (j < 12) {
+    tdTime.textContent = `${j}am`;
+    tr.append(tdTime);
+    j++;
+    console.log(j);
+    continue;
+  }
+  if (j === 12) {
+    tdTime.textContent = `12pm`;
+    tr.append(tdTime);
+    j++;
+    console.log(j);
+    continue;
+  }
+  if (j > 12) {
+    tdTime.textContent = `${j - 12}pm`;
+    tr.append(tdTime);
+    j++;
+    console.log(j);
+    continue;
   }
 }
 
+table.append(tr);
+
+// 
 
 
 
