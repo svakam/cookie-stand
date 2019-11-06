@@ -87,7 +87,7 @@ function City(location, minCustomers, maxCustomers, avgCookiePerSale, numberHour
       tr.append(tdCookies);
     }
 
-    tableCreate.append(tr);
+    domReference.append(tr);
   }
 }
 
@@ -133,7 +133,9 @@ var renderTableHeader = function (domReference) {
 
   /* put times into cells and concatenate am/pm based on time */
   for (var i = 0; i < numberHoursStoreOpen; i++) {
+
     var tdTime = document.createElement('th');
+
     if (j < 12) {
       tdTime.textContent = `${j}am`;
       tr.append(tdTime);
@@ -169,6 +171,7 @@ var renderTableFooter = function (domReference) {
   // add new table row for vertical totals
   var tr = document.createElement('tr');
 
+  // counter for total of totals
   var sumHourTotal = 0;
 
   /* td for classifying vertical totals row */
@@ -180,13 +183,16 @@ var renderTableFooter = function (domReference) {
   for (var i = 0; i < 14; i++) {
     var tdVerticalTotals = document.createElement('td');
     var sumHour = 0;
+
     for (var j = 0; j < cities.length; j++) {
+
       // only vertical sum
       sumHour = sumHour + cities[j].arrayPurchasedCookiesInADay[i];
 
       // total of totals
       sumHourTotal = sumHourTotal + cities[j].arrayPurchasedCookiesInADay[i];
     }
+
     tdVerticalTotals.textContent = sumHour;
     tr.append(tdVerticalTotals);
   }
@@ -199,26 +205,34 @@ var renderTableFooter = function (domReference) {
   domReference.append(tr);
 }
 
-// anchor to HTML and start a div for a table
-var divForTable = document.getElementById('div-for-table');
-var tableCreate = document.createElement('table');
+// render whole table function: header, body, footer
+var renderTable = function () {
+  // anchor to HTML and start a div for a table
+  var divForTable = document.getElementById('div-for-table');
+  var tableCreate = document.createElement('table');
 
-// set table element to have id of table to append tr/tds to and also CSS reference
-tableCreate.setAttribute("id", "table"); // ?
+  // set table element to have id of table to append tr/tds to and also CSS reference
+  tableCreate.setAttribute("id", "table"); // ?
 
-// add table to reference HTML
-divForTable.append(tableCreate);
+  // add table to reference HTML
+  divForTable.append(tableCreate);
 
-// anchor JS to this table
-var table = document.getElementById('table');
+  // anchor JS to this table
+  var table = document.getElementById('table');
 
-// render header, body, footer of table
-renderTableHeader(table);
+  // render header, body, footer of table
+  renderTableHeader(table);
 
-for (var cityCounter = 0; cityCounter < cities.length; cityCounter++) {
-  var currentCity = cities[cityCounter];
+  for (var cityCounter = 0; cityCounter < cities.length; cityCounter++) {
+    var currentCity = cities[cityCounter];
 
-  currentCity.render(table);
+    currentCity.render(table);
+  }
+
+  var divider = document.createElement('br');
+  table.append(divider);
+
+  renderTableFooter(table);
 }
 
-renderTableFooter(table);
+renderTable();
