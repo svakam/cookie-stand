@@ -1,5 +1,7 @@
 'use strict';
 
+var numberHoursStoreOpen = 14;
+
 // function for getting random number of customers per hour 
 var getCustomersPerHour = function () {
   var random = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
@@ -9,18 +11,17 @@ var getCustomersPerHour = function () {
 
 // function for getting cookies sold per hour
 var getCookiesSoldPerHour = function () {
-  // // commented out time-based hour counter for lab06 ul
+  // time-based counter for open time
   // var j = this.storeOpenTime;
 
   // initialize sum of cookies sold whole day
   var totalCookiesSoldDay = 0;
 
-  // iterating over number of hours store is open to get to each hour
-  for (var i = 0; i < this.numberHoursStoreOpen; i++) {
+  for (var i = 0; i < numberHoursStoreOpen; i++) {
     // cookies per hour = avg sale * random customers/hour
     var randomCookiesPerHour = this.avgCookiePerSale * this.randomCustomersPerHour();
 
-    // make integer value of random cookies per hour
+    // make integer value
     randomCookiesPerHour = Math.round(randomCookiesPerHour);
 
     // cookies sold whole day = add cookies per hour to the sum, per iteration 
@@ -28,8 +29,7 @@ var getCookiesSoldPerHour = function () {
 
     this.arrayPurchasedCookiesInADay[i] = randomCookiesPerHour;
 
-    // // commented out lab06 time-based cookies per hour entry into array: 
-    // am/pm modifier
+    // // am/pm modifier commented out because will use for table
     // if (j < 12) {
     //   this.arrayPurchasedCookiesInADay[i] = `${j}:00am: ${randomCookiesPerHour} cookies`;
     //   j++;
@@ -45,8 +45,6 @@ var getCookiesSoldPerHour = function () {
     //   j++;
     //   continue;
     // }
-
-
   }
 
   // push total cookies sold per day into array 
@@ -58,28 +56,27 @@ var getCookiesSoldPerHour = function () {
 }
 
 // city constructor
-function City(location, minCustomers, maxCustomers, avgCookiePerSale, storeOpenTime, numberHoursStoreOpen, arrayPurchasedCookiesInADay, randomCustomersPerHour, simulatedCookiesPurchasedPerHour) {
-  this.location = location;
-  this.minCustomers = minCustomers;
-  this.maxCustomers = maxCustomers;
-  this.avgCookiePerSale = avgCookiePerSale;
-  this.storeOpenTime = storeOpenTime;
-  this.numberHoursStoreOpen = numberHoursStoreOpen;
-  this.arrayPurchasedCookiesInADay = arrayPurchasedCookiesInADay;
-  this.randomCustomersPerHour = randomCustomersPerHour;
-  this.simulatedCookiesPurchasedPerHour = simulatedCookiesPurchasedPerHour;
+function City(location, minCustomers, maxCustomers, avgCookiePerSale, numberHoursStoreOpen, arrayPurchasedCookiesInADay, randomCustomersPerHour, simulatedCookiesPurchasedPerHour) {
+  this.location = location; // 1
+  this.minCustomers = minCustomers; // 2
+  this.maxCustomers = maxCustomers; // 3
+  this.avgCookiePerSale = avgCookiePerSale; // 4
+  this.numberHoursStoreOpen = numberHoursStoreOpen; // 5
+  this.arrayPurchasedCookiesInADay = arrayPurchasedCookiesInADay; // 6
+  this.randomCustomersPerHour = randomCustomersPerHour; // 7
+  this.simulatedCookiesPurchasedPerHour = simulatedCookiesPurchasedPerHour; // 8
 }
 
-// creating each city as object
-var Seattle = new City('Seattle', 23, 65, 6.3, 6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+// object declaration: 1 = location, 2 = min, 3 = max, 4 = average, 5 = hoursopen, 6 = empty array, 7 = customers, 8 = cookies sold function
+var Seattle = new City('Seattle', 23, 65, 6.3, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
 
-var Tokyo = new City('Tokyo', 3, 24, 1.2, 6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+var Tokyo = new City('Tokyo', 3, 24, 1.2, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
 
-var Dubai = new City('Dubai', 11, 38, 3.7, 6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+var Dubai = new City('Dubai', 11, 38, 3.7, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
 
-var Paris = new City('Paris', 20, 38, 2.3, 6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+var Paris = new City('Paris', 20, 38, 2.3, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
 
-var Lima = new City('Lima', 2, 16, 4.6, 6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+var Lima = new City('Lima', 2, 16, 4.6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
 
 // create array of cities
 var cities = [Seattle, Tokyo, Dubai, Paris, Lima];
@@ -102,52 +99,102 @@ Lima.simulatedCookiesPurchasedPerHour();
 
 
 
-
 // add city data in a table to sales.html 
 
 // anchor to HTML and start table
 var tableCityData = document.getElementById('table-city-data');
 var table = document.createElement('table');
+table.setAttribute("id", "table");
 
 tableCityData.append(table);
 
 // start row of hours and total/city
 var tr = document.createElement('tr');
-var tdEmptyCorner = document.createElement('td');
-tr.append(tdEmptyCorner);
+var tdSummary = document.createElement('td');
+tdSummary.textContent = 'Cookies sold per hour per city'
+tr.append(tdSummary);
 
-// how to access inner-scoped property of an object from outside?
+/* how to access inner-scoped property of an object from outside? */
 var j = 6;
 
-// put times into cells
-for (var i = 0; i < 14; i++) {
+/* put times into cells */
+for (var i = 0; i < numberHoursStoreOpen; i++) {
   var tdTime = document.createElement('td');
   if (j < 12) {
     tdTime.textContent = `${j}am`;
     tr.append(tdTime);
     j++;
-    console.log(j);
     continue;
   }
   if (j === 12) {
     tdTime.textContent = `12pm`;
     tr.append(tdTime);
     j++;
-    console.log(j);
     continue;
   }
   if (j > 12) {
     tdTime.textContent = `${j - 12}pm`;
     tr.append(tdTime);
     j++;
-    console.log(j);
     continue;
   }
 }
 
+/* put total/city into cell */
+var tdTotalCity = document.createElement('td');
+tdTotalCity.textContent = 'Daily Location Total';
+tr.append(tdTotalCity);
+
+/* append first row into table */
 table.append(tr);
 
-// 
+// start new tr/td set of location and cookies sold
+
+for (var cityIndex = 0; cityIndex < cities.length; cityIndex++) {
+  // for every city in city array, make a table row 
+  tr = document.createElement('tr');
+
+  // for every city in city array, print its location property to HTML
+  var tdLocation = document.createElement('td');
+  tdLocation.textContent = cities[cityIndex].location;
+  tr.append(tdLocation);
+
+  // for every city, access its array of cookies sold over the day to print to HTML
+  for (var cityData = 0; cityData < cities[cityIndex].arrayPurchasedCookiesInADay.length; cityData++) {
+    var tdCookies = document.createElement('td');
+
+    tdCookies.textContent = cities[cityIndex].arrayPurchasedCookiesInADay[cityData];
+    tr.append(tdCookies);
+  }
+
+  table.append(tr);
+}
+
+// add new table row for vertical totals
+tr = document.createElement('tr');
+
+/* td for classifying vertical totals row */
+var tdVertical = document.createElement('td');
+tdVertical.textContent = 'Vertical totals';
+tr.append(tdVertical);
+
+/* looping 14 times to add td's horizontally */
+
+for (var i = 0; i < 14; i++) {
+  var tdVerticalTotals = document.createElement('td');
+  var sumHour = 0;
+  for (var j = 0; j < cities.length; j++) {
+    sumHour = sumHour + cities[j].arrayPurchasedCookiesInADay[i];
+  }
+  tdVerticalTotals.textContent = sumHour;
+  tr.append(tdVerticalTotals);
+}
+
+table.append(tr);
 
 
 
+
+// render function for each set of HTML inputs from JS
+// combine render functions into one mega render function?
+// domReference?
