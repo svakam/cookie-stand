@@ -1,6 +1,7 @@
 # Synopsis
 
-Week 2, Day 1
+Week 2, Day 1: Object literals
+- Create object literals of cities
 - Store min/max hourly customers, average cookies per customer
 - Generate random number of customers per hour
 - Calculate/store simulated amounts of cookies per hour
@@ -9,6 +10,10 @@ Week 2, Day 1
 - Find sum of hourly totals
 
 Week 2, Day 2
+- Replace object literals with constructor
+- Abstraction
+- Add city's data to an HTML table through JavaScript
+- Use array notation to sum via [i][j] and [j][i]
 
 # Code Example
 
@@ -26,6 +31,16 @@ for (int i = 0; i < array1.length; i++) {
 }
 ```
 
+Week 2, Day 2: 
+```
+function objectType (x property, y property, z property, etc.) {
+    this.x = x; 
+    this.y = y; 
+    this.z = z; 
+}
+
+var objectName = new objectType (x, y, z);
+```
 
 # Motivation
 
@@ -34,6 +49,7 @@ This is a Code 201 project (Code Fellows) that develops skills of modifying HTML
 # Installation
 
 # Contributors
+GitHub user jxson for providing a README.md format. 
 
 # License
 
