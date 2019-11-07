@@ -30,7 +30,7 @@ var getCookiesSoldPerHour = function () {
     // cookies sold whole day = add cookies per hour to the sum, per iteration 
     totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
 
-    // // am/pm modifier commented out because rendering in HTML table
+    // // am/pm modifier commented out because now rendering in HTML table
     // if (j < 12) {
     //   this.arrayPurchasedCookiesInADay[i] = `${j}:00am: ${randomCookiesPerHour} cookies`;
     //   j++;
@@ -57,7 +57,7 @@ var getCookiesSoldPerHour = function () {
 }
 
 // city constructor
-function City(location, minCustomers, maxCustomers, avgCookiePerSale, numberHoursStoreOpen, arrayPurchasedCookiesInADay, randomCustomersPerHour, simulatedCookiesPurchasedPerHour) {
+function City(location, minCustomers, maxCustomers, avgCookiePerSale, numberHoursStoreOpen, arrayPurchasedCookiesInADay, randomCustomersPerHour, cookiesPerHour) {
   this.location = location; // 1
   this.minCustomers = minCustomers; // 2
   this.maxCustomers = maxCustomers; // 3
@@ -65,7 +65,7 @@ function City(location, minCustomers, maxCustomers, avgCookiePerSale, numberHour
   this.numberHoursStoreOpen = numberHoursStoreOpen; // 5
   this.arrayPurchasedCookiesInADay = arrayPurchasedCookiesInADay; // 6
   this.randomCustomersPerHour = randomCustomersPerHour; // 7
-  this.simulatedCookiesPurchasedPerHour = simulatedCookiesPurchasedPerHour; // 8
+  this.cookiesPerHour = cookiesPerHour; // 8
 
   // render array of cookies/hour in HTML
   this.render = function (domReference) {
@@ -97,25 +97,15 @@ var Tokyo = new City('Tokyo', 3, 24, 1.2, 14, [], getCustomersPerHour, getCookie
 var Dubai = new City('Dubai', 11, 38, 3.7, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
 var Paris = new City('Paris', 20, 38, 2.3, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
 var Lima = new City('Lima', 2, 16, 4.6, 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+// on form submission, create new object with these properties
 
 // create array of city objects
 var cities = [Seattle, Tokyo, Dubai, Paris, Lima];
+// on form submission, add new object to this array
 
-// testing city data output
-console.log(Seattle);
-Seattle.simulatedCookiesPurchasedPerHour();
-
-console.log(Tokyo);
-Tokyo.simulatedCookiesPurchasedPerHour();
-
-console.log(Dubai);
-Dubai.simulatedCookiesPurchasedPerHour();
-
-console.log(Paris);
-Paris.simulatedCookiesPurchasedPerHour();
-
-console.log(Lima);
-Lima.simulatedCookiesPurchasedPerHour();
+for (var i = 0; i < cities.length; i++) {
+  cities[i].cookiesPerHour();
+}
 
 // functions for rendering header, body, footer in an HTML table
 
@@ -212,7 +202,7 @@ var renderTable = function () {
   var tableCreate = document.createElement('table');
 
   // set table element to have id of table to append tr/tds to and also CSS reference
-  tableCreate.setAttribute("id", "table"); // ?
+  tableCreate.setAttribute("id", "table");
 
   // add table to reference HTML
   divForTable.append(tableCreate);
@@ -220,9 +210,12 @@ var renderTable = function () {
   // anchor JS to this table
   var table = document.getElementById('table');
 
-  // render header, body, footer of table
+  table.innerHTML = '';
+
+  // render header
   renderTableHeader(table);
 
+  // render body
   for (var cityCounter = 0; cityCounter < cities.length; cityCounter++) {
     var currentCity = cities[cityCounter];
 
@@ -232,7 +225,23 @@ var renderTable = function () {
   var divider = document.createElement('br');
   table.append(divider);
 
+  // render footer
   renderTableFooter(table);
 }
+
+// form submission -> create new city object and push to object array
+var elForm = document.getElementById('form-fill-table');
+
+elForm.addEventListener('submit', function (event) {
+  event.preventDefault(); // prevent reload of page
+
+  var newCity = new City(event.target.city.value, parseInt(event.target.mincustomers.value), parseInt(event.target.maxcustomers.value), parseInt(event.target.avgcookies.value), 14, [], getCustomersPerHour, getCookiesSoldPerHour);
+
+  newCity.cookiesPerHour();
+
+  cities.push(newCity);
+
+  renderTable();
+});
 
 renderTable();
