@@ -1,26 +1,37 @@
 * {
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 125%;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 125%;
+  margin: 0.5%;
 }
 
 #table {
-    border-style: solid;
-    border-color: black;
-    border-width: 7px;
+  border-style: solid;
+  border-color: black;
+  border-width: 7px;
+  min-width: 850px;
+  padding: 0.5%;
+}
+
+b {
+  font-size: 150%;
+}
+
+#div-for-table {
+  text-align: center;
 }
 
 th {
-    width: 1%;
-    padding: 1%;
+  width: 1%;
+  padding: 1%;
 }
 
-br {
-    width: 5%;
+hr {
+  border-color: black;
+  width: 30%;
 }
 
 td {
-    border-style: solid;
-    border-color: black;
-    text-align: center;
-    padding: 0.5%;
+  border-style: solid;
+  border-color: black;
+  padding: 0.5%;
 }

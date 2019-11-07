@@ -15,6 +15,10 @@ Week 2, Day 2
 - Add city's data to an HTML table through JavaScript
 - Use array notation to sum via [i][j] and [j][i]
 
+Week 2, Day 3
+- Add user-input form submission to JS, adding new object per submission and generating recalculated data for the table
+- Introduction to event listeners
+
 # Code Example
 
 Week 2, Day 1: 
@@ -40,6 +44,16 @@ function objectType (x property, y property, z property, etc.) {
 }
 
 var objectName = new objectType (x, y, z);
+```
+
+Week 2, Day 3:
+```
+<fieldset>
+    <legend></legend>
+    <form>
+        <input type>
+    </form>
+<fieldset>
 ```
 
 # Motivation
