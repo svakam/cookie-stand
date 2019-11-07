@@ -1,5 +1,7 @@
 # Synopsis
 
+Deployed at https://svakam.github.io/cookie-stand/.
+
 Week 2, Day 1: Object literals
 - Create object literals of cities
 - Store min/max hourly customers, average cookies per customer
