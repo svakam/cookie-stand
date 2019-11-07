@@ -51,8 +51,6 @@ var getCookiesSoldPerHour = function () {
   // push total cookies sold per day into array; design decision
   this.arrayPurchasedCookiesInADay.push(`${totalCookiesSoldDay} cookies`);
 
-  console.log(this.arrayPurchasedCookiesInADay);
-
   return this.arrayPurchasedCookiesInADay;
 }
 

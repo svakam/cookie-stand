@@ -2,28 +2,32 @@
 <html>
 
 <head>
-  <title>Sales</title>
+  <title>Sales Chart</title>
   <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
   <main>
-    <a href="index.html">Main page</a>
+    <a id="homelink" href="index.html">Home</a>
     <hr />
     <!-- anchor from JS to HTML -->
-    <div id="div-for-table"><b>Sales</b></div>
+    <div id="div-for-table">
+      <h1><b>Sales Chart</b></h1>
+    </div>
     <hr />
     <div>
-      <fieldset>
+      <fieldset id="fieldset">
         <legend>Input a new location's average sales:</legend>
         <form id="form-fill-table">
           <label>City:<input type="text" name="city" maxlength="35" /></label><br />
           <label>Minimum customers:<input type="text" name="mincustomers" maxlength="3" /></label><br />
           <label>Maximum customers:<input type="text" name="maxcustomers" maxlength="3" /></label><br />
           <label>Average cookies per sale:<input type="text" name="avgcookies" maxlength="3" /></label><br />
-          <input type="submit" value="Add" />
+          <input id="add" type="submit" value="Add" />
         </form>
       </fieldset>
+      <img id="freshsalmon" src="img/fresh-salmon.jpg">
+      <img id="cookies" src="img/cookies.jpg">
     </div>
   </main>
   <script src="/js/app.js"></script>
