@@ -204,11 +204,6 @@ var renderTable = function () {
     currentCity.render(table);
   }
 
-  var p = document.createElement('p');
-  var divider = document.createElement('br');
-  p.append(divider);
-  table.append(p);
-
   // render footer
   renderTableFooter(table);
 }
