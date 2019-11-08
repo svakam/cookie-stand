@@ -1,111 +1,12 @@
-* {
+:not(#homelink) {
   font-family: Arial, Helvetica, sans-serif;
-  line-height: 125%;
-  margin: 0.5%;
-  color: lightgray;
-
-  /* testing only */
-  
-  /* border: solid;
-  border-color: black; */
 }
 
 #homelink {
-  border: solid;
+  font-family: 'Montserrat', sans-serif;
+  border-style: solid;
   border-radius: 20px;
-  padding: 4px;
-  background-color: #800;
   text-decoration: none;
+  padding: 5px;
 }
 
-#table {
-  border-style: solid;
-  border-color: lightgray;
-  border-width: 7px;
-  min-width: 850px;
-  padding: 0.2%;
-}
-
-:not(table) {
-  background-color: #500;
-}
-
-b {
-  font-size: 150%;
-}
-
-h1 {
-  padding-bottom: 1%;
-}
-
-#div-for-table {
-  text-align: center;
-  overflow-x: auto;
-}
-
-legend {
-  font-size: 16pt;
-  background-color: #424;
-  font-style: italic;
-}
-
-#fieldset {
-  width: 45%;
-  background-color: #400;
-  display: inline-block;
-}
-
-label {
-  font-size: 100%;
-  background-color: #222;
-}
-
-#form-fill-table {
-  min-width: 360px;
-  width: 100%;
-  background-color: #222;
-}
-
-input {
-  background-color: lightgray;
-  color: black;
-}
-
-th {
-  width: 1%;
-  border-style: solid;
-  border-color: lightgray;
-  background-color: #424;
-
-}
-
-#freshsalmon {
-  width: 15%;
-  display: inline-block;
-  min-width: 200px;
-  position: relative;
-  left: 6%;
-}
-
-#cookies {
-  width: 15%;
-  display: inline-block;
-  min-width: 250px;
-  position: relative;
-  left: 9%;
-}
-
-hr {
-  border-color: lightgray;
-  margin-left: 40%;
-  margin-right: 40%;
-  margin-top: 1.5%;
-  margin-bottom: 1.5%;
-}
-
-td {
-  border-style: solid;
-  border-color: lightgray;
-  background-color: #624;
-  padding: 0.5%;
-}

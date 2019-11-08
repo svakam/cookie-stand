@@ -30,22 +30,6 @@ var getCookiesSoldPerHour = function () {
     // cookies sold whole day = add cookies per hour to the sum, per iteration 
     totalCookiesSoldDay = totalCookiesSoldDay + randomCookiesPerHour;
 
-    // // am/pm modifier commented out because now rendering in HTML table
-    // if (j < 12) {
-    //   this.arrayPurchasedCookiesInADay[i] = `${j}:00am: ${randomCookiesPerHour} cookies`;
-    //   j++;
-    //   continue;
-    // }
-    // if (j === 12) {
-    //   this.arrayPurchasedCookiesInADay[i] = `12:00pm: ${randomCookiesPerHour} cookies`;
-    //   j++;
-    //   continue;
-    // }
-    // if (j > 12) {
-    //   this.arrayPurchasedCookiesInADay[i] = `${j - 12}:0pm: ${randomCookiesPerHour} cookies`;
-    //   j++;
-    //   continue;
-    // }
   }
 
   // push total cookies sold per day into array; design decision
@@ -220,8 +204,10 @@ var renderTable = function () {
     currentCity.render(table);
   }
 
+  var p = document.createElement('p');
   var divider = document.createElement('br');
-  table.append(divider);
+  p.append(divider);
+  table.append(p);
 
   // render footer
   renderTableFooter(table);

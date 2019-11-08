@@ -4,6 +4,7 @@
 <head>
   <title>Sales Chart</title>
   <link href="css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -12,13 +13,16 @@
     <hr />
     <!-- anchor from JS to HTML -->
     <div id="div-for-table">
+      <!-- css id -->
       <h1><b>Sales Chart</b></h1>
     </div>
     <hr />
     <div>
       <fieldset id="fieldset">
+        <!-- css id -->
         <legend>Input a new location's average sales:</legend>
         <form id="form-fill-table">
+          <!-- css id -->
           <label>City:<input type="text" name="city" maxlength="35" /></label><br />
           <label>Minimum customers:<input type="text" name="mincustomers" maxlength="3" /></label><br />
           <label>Maximum customers:<input type="text" name="maxcustomers" maxlength="3" /></label><br />
@@ -26,8 +30,6 @@
           <input id="add" type="submit" value="Add" />
         </form>
       </fieldset>
-      <img id="freshsalmon" src="img/fresh-salmon.jpg">
-      <img id="cookies" src="img/cookies.jpg">
     </div>
   </main>
   <script src="./js/app.js"></script>
