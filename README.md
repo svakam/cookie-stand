@@ -21,6 +21,12 @@ Week 2, Day 3
 - Add user-input form submission to JS, adding new object per submission and generating recalculated data for the table
 - Introduction to event listeners
 
+Week 2, Day 4
+- Add CSS
+
+Week 2, Day 5
+- Wrap up, clean up code
+
 # Code Example
 
 Week 2, Day 1: 
@@ -57,6 +63,9 @@ Week 2, Day 3:
     </form>
 <fieldset>
 ```
+
+Week 2, Day 4: 
+first-child, last-child, not(X), etc.
 
 # Motivation
 

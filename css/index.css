@@ -1,0 +1,10 @@
+header, main, footer {
+    background-color: #600;
+    font-size: 14pt;
+    padding: 15px; /* what??? */
+    min-width: 1200px;
+}
+
+html > body {
+    background-color: black;
+}
