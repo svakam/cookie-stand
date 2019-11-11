@@ -1,10 +1,197 @@
+html {
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    padding: 2px;
+}
+
+main > section {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+main > section > article {
+    margin-right: 30px;
+}
+
+main > section :nth-child(3) {
+    margin-right: -50px;
+}
+
 header, main, footer {
     background-color: #600;
     font-size: 14pt;
-    padding: 15px; /* what??? */
     min-width: 1200px;
 }
 
 html > body {
     background-color: black;
+}
+
+#logo {
+    width: 200px;
+    height: 70px;
+    position: relative;
+    top: 10px;
+}
+
+header > article {
+    display: inline-block;
+    color: lightgray;
+    margin-left: 6%;
+}
+
+header > article > a {
+    color: lightgray;
+    border-style: solid;
+    border-radius: 20px;
+    text-decoration: none;
+    padding: 10px;
+    color: lightgray;
+    background-color: black;
+}
+
+header {
+  position: sticky;
+  top: -15px;
+  z-index: 1;
+  background-color: #900;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom-style: solid;
+  border-bottom-color: black;
+}
+
+#hero {
+    width: 960px;
+    height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #c52;
+}
+
+
+#hero > p {
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 65px;
+    text-align: center;
+    color: #000;
+    font-size: 50pt;
+    min-width: 500px;
+}
+
+#hero > img {
+    height: 90%;
+    width: 75%;
+    margin-left: 12.5%;
+    margin-top: 2%;
+    opacity: 30%;
+}
+
+#section2 {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#section2 > article {
+    display: inline-block;
+    width: 300px;
+    height: 375px;
+    background-color: #b52;
+}
+
+#section2 > article > img {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#section2 > article > p {
+    text-align: center;
+    color: #600;
+    font-size: 10pt;
+    position: relative;
+    top: 300px;
+}
+
+#cutter {
+    width: 250px;
+}
+
+#section3 {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #b52;
+}
+
+#section3 > article {
+    display: inline-block;
+} 
+
+#section3 > article > p {
+    max-width: 400px;
+    max-height: 360px;
+    overflow: scroll;
+    background-color: lightgray;
+    color: #800;
+    text-align: center;
+    padding: 15px;
+    line-height: 1.5em;
+    position: relative;
+    bottom: 50px;
+    left: 30px;
+}
+
+#buy {
+  color: lightgray;
+  border-style: solid;
+  border-radius: 20px;
+  text-decoration: none;
+  padding: 10px;
+  color: lightgray;
+  background-color: black;
+  position: relative;
+  font-style: italic;
+  left: 69%;
+  bottom: 40px;
+}
+
+#featured > img {
+  width: 470px;
+}
+
+#featured { 
+  width: 430px;
+}
+
+footer {
+  border-top-style: solid;
+  border-top-color: black;
+  background-color: #900;
+}
+
+footer > p {
+  display: inline-block;
+  font-size: 9pt;
+  color: lightgray;
+  background-color: black;
+  margin-left: 50px;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: white;
+  padding: 7px;
+  height: 10px;
+  text-align: center;
+}
+
+footer > img {
+  width: 200px;
+  position: relative;
+  left: 18%;
 }
