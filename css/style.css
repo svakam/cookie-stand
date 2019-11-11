@@ -23,6 +23,13 @@ h1 {
   font-size: 60pt;
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 1px;
+  background-color: #b52;
+  border-style: solid;
+  border-color: black;
+}
+
+#backgroundblack1 {
+  background-color: #900;
 }
 
 #header1 {
@@ -53,7 +60,7 @@ legend {
 
 #fieldset {
   padding: 25px;
-  background-color: gray;
+  background-color: #b52;
   width: 45%;
 }
 
@@ -80,6 +87,7 @@ hr {
 table {
   border-style: solid;
   border-width: 2px;
+  background-color: #b52;
 }
 
 td, th {
